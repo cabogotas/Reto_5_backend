@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+//Crear tabla
+
 @Entity
 @Table(name = "reservations")
 public class Reservaciones implements Serializable {
@@ -16,10 +18,10 @@ public class Reservaciones implements Serializable {
     private Date devolutionDate;
     private String status="created";
 
-    private String score; //depende el grupo
+    //Crear relaciones
 
     @ManyToOne
-    @JoinColumn(name= "id")
+    @JoinColumn(name = "id")
     @JsonIgnoreProperties("reservations")
     private Boat boat;
 
@@ -27,6 +29,8 @@ public class Reservaciones implements Serializable {
     @JoinColumn(name = "idClient")
     @JsonIgnoreProperties({"reservations", "messages"})
     private Cliente client;
+
+    private String score;
 
     public Integer getIdReservation() {
         return idReservation;
@@ -46,10 +50,6 @@ public class Reservaciones implements Serializable {
 
     public String getScore() {
         return score;
-    }
-
-    public Boat getBoat() {
-        return boat;
     }
 
     public Cliente getClient() {
@@ -76,11 +76,15 @@ public class Reservaciones implements Serializable {
         this.score = score;
     }
 
-    public void setBoat(Boat boat) {
-        this.boat = boat;
-    }
-
     public void setClient(Cliente client) {
         this.client = client;
+    }
+
+    public Boat getBoat() {
+        return boat;
+    }
+
+    public void setBoat(Boat boat) {
+        this.boat = boat;
     }
 }
